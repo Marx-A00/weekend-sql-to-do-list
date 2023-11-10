@@ -1,13 +1,6 @@
 console.log('JS is sourced!');
 getTasks();
 
-
-
-
-
-
-// function submitTask(){}
-
 function getTasks(){
     axios({
         method: 'GET',
@@ -27,6 +20,7 @@ function addTask(event){
     event.preventDefault();
 
     let taskName = document.getElementById("todoItemName").value;
+    document.getElementById("todoItemName").value = '';
     console.log(taskName);
 
     axios({
@@ -44,13 +38,22 @@ function addTask(event){
 
 };
 
-// function isComplete(){}
-
-
-// function refreshToDoList(){}
-
+function markAsCompleted(event){
+    console.log("mark as completed works!");
+    event.preventDefault();
+    let todoID = event.target.closest("tr").getAttribute("data-todoid");
+    axios({
+        method: 'PUT',
+        url: `todos/${todoID}`,
+    }).then((response) =>{
+        getTasks();
+    }).catch((error) =>{
+        console.log("error in GET",error);
+    })
+}
 
 function renderToDoList(todoList){
+
     const viewTodos = document.getElementById("todoBody");
     viewTodos.innerHTML = '';
 
@@ -60,12 +63,30 @@ function renderToDoList(todoList){
         <tr data-todoid="${todoItem.id}">
         <td>${todoItem.text}</td>
         <td>${todoItem.isComplete}</td>
+        <td><button onclick="markAsCompleted(event)">Ⅹ</button>
+
+          <button onclick="deleteTodo(event)">Delete Task</button></td>
             </tr>
         `
     }
 }
 
-// function deleteTodo(){}
+function deleteTodo(event){
+    event.preventDefault();
+    let clickedButton = event.target;
+    let theTableRow = clickedButton.closest('tr');
+
+    let dataID = theTableRow.getAttribute('data-todoid');
+    console.log(dataID);
+    axios({
+        method: 'DELETE',
+        url: `/todos/${dataID}`
+    }).then((response) =>{
+        getTasks();
+    }).catch((error)=>{
+        console.log('DELETE /books/:id fail',error);
+    })
+}
 
 
 

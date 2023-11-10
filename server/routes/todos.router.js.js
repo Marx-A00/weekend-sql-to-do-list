@@ -24,16 +24,15 @@ router.post('/',(req,res) => {
     let queryText = 
     `
     INSERT INTO "todos"
-    ("text","isComplete")
+    ("text")
     VALUES
-    ($1,$2);
+    ($1);
     `
 
 
 
     const sqlValues = [
-        req.body.text,
-        req.body.isComplete
+        req.body.taskName
     ]
 
     pool.query(queryText,sqlValues)

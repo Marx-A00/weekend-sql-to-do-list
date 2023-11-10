@@ -61,11 +61,11 @@ function renderToDoList(todoList){
         viewTodos.innerHTML +=
         `
         <tr data-todoid="${todoItem.id}">
-        <td>${todoItem.text}</td>
+        <td data-testid="toDoItem" class= ${todoItem.isComplete ? "task-completed" : "task-not-completed"} >${todoItem.text}</td>
         <td>${todoItem.isComplete}</td>
-        <td><button onclick="markAsCompleted(event)">Ⅹ</button>
+        <td><button data-testid="completeButton" onclick="markAsCompleted(event)">Ⅹ</button>
 
-          <button onclick="deleteTodo(event)">Delete Task</button></td>
+          <button data-testid="deleteButton" onclick="deleteTodo(event)">Delete Task</button></td>
             </tr>
         `
     }

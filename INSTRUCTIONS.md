@@ -14,7 +14,7 @@ You are going to create *your very first full-stack to-do list app*.
 
 You know when you'll probably build another to-do list app? **Every time** you're learning to use a new language or framework to build CRUD apps!
 
-As software developers, our job is to learn new stuff often. You'll probably be building lots more to-do list apps.
+As software developers, our job is to learn new stuff often. You'll probably be building lots more to-do list apps
 
 ## Requirements:
 
@@ -52,12 +52,12 @@ Create a new database through Postico. Name it `weekend-to-do-app`. Then, run th
 
 ## Testing Requirements:
 
-1. The input you use to collect "to-do text" user input must have:
+x. The input you use to collect "to-do text" user input must have:
     * `data-testid="toDoTextInput"`
-2. The button that a user clicks to "create" a new to-do must have:
+x. The button that a user clicks to "create" a new to-do must have:
   * `data-testid="submitButton"`
-3. Each rendered to-do item must have:
-    * `data-testid="toDoItem"`
+x. Each rendered to-do item must have:
+    x `data-testid="toDoItem"`
     * It doesn't matter what HTML element you choose to use to represent a single to-do item, but it must have this attribute applied. Examples:
       * ```js
           <li data-testid="toDoItem">...</li>
@@ -65,9 +65,9 @@ Create a new database through Postico. Name it `weekend-to-do-app`. Then, run th
           <div data-testid="toDoItem">...</div>
           <article data-testid="toDoItem">...</article>
         ```
-4. Each to-do item's "delete" button must have:
+x. Each to-do item's "delete" button must have:
     * `data-testid="deleteButton"`
-5. Each to-do item's "mark complete" button must have:
+x. Each to-do item's "mark complete" button must have:
     * `data-testid="completeButton"`
 6. Each completed to-do item must have:
     * A CSS class of `completed` applied to its `data-testid="toDoItem"` element.

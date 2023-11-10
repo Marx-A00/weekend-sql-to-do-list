@@ -44,6 +44,8 @@ Use CSS styling to move the aesthetic of the page beyond the basic HTML look. Qu
 
 We would recommend you spend some time thinking about how to approach this problem. Think through all the logic that will be needed prior to writing any code. Take your time, relax, remember that impostor syndrome is real, and that you are capable of knocking this out of the park!
 
+
+✅
 ## Create Your Database
 
 Create a new database through Postico. Name it `weekend-to-do-app`. Then, run the queries found `database.sql` to create a `todos` table and populate it with two initial to-do items.

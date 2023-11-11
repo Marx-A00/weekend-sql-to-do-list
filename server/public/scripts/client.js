@@ -1,27 +1,32 @@
-console.log('JS is sourced!');
-getTasks();
+// on start function, is called when the program is run, which calls 
+// to the getTasks() function 
+onStart();
 
+// function that makes a GET request, then calls to the render function
 function getTasks(){
     axios({
         method: 'GET',
         url: '/todos'
     }).then((response) =>{
-        console.log("GET/ tasks", response.data);
         renderToDoList(response.data)
     }).catch((error) => {
         console.log('error with GET', error);
     })
+}
 
+// on start function, for instructions when program is started
+function onStart(){
+    getTasks();
 }
 
 
-
+// function that handles adding a task from client side
+// makes a POST request which updates database
 function addTask(event){
     event.preventDefault();
 
     let taskName = document.getElementById("todoItemName").value;
     document.getElementById("todoItemName").value = '';
-    console.log(taskName);
 
     axios({
         method:'POST',
@@ -29,17 +34,17 @@ function addTask(event){
         data:
          {
             taskName: taskName,
-         }         
+         }        
+
     }).then(function(response){
+        // after post is made, we render again to show new data on client
         getTasks();
     }).catch(function(error){
         console.log('error in post',error);
     })
-
 };
 
 function markAsCompleted(event){
-    console.log("mark as completed works!");
     event.preventDefault();
     let todoID = event.target.closest("tr").getAttribute("data-todoid");
     axios({
@@ -74,15 +79,8 @@ function renderToDoList(todoList){
 function deleteTodo(event){
     event.preventDefault();
     let clickedButton = event.target;
-    let testClickedButton = event.target.getAttribute("data-testid");
-    // Verified that clicked button has attribute of data-testid
-    console.log(" test clicked button aka event.target: ",testClickedButton);
-    console.log("clicked button aka event.target: ",clickedButton);
     let theTableRow = clickedButton.closest('tr');
-    console.log("the table row aka clickedButton.closest('tr'):",theTableRow);
-
     let dataID = theTableRow.getAttribute('data-todoid');
-    console.log(dataID);
     axios({
         method: 'DELETE',
         url: `/todos/${dataID}`

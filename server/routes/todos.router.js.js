@@ -1,23 +1,18 @@
 const router = require('express').Router();
 const pool = require('../modules/pool');
 
-
 // GET all Tasks
-
 router.get('/',(req,res) => {
     let queryText = 'SELECT * FROM "todos" ORDER BY "id";'
     pool.query(queryText)
     .then((dbResult) =>{
-        console.log('dbResult.rows:', dbResult.rows);
         res.send(dbResult.rows); //<--- inside should be result.rows, should return results in an object
     })
     .catch(dbError =>{
         console.log("error getting ToDoList", dbError);
         res.sendStatus(500);
     })
-
 });
-
 
 // // gives ability to create a new todo item
 router.post('/',(req,res) => {
@@ -44,7 +39,6 @@ router.post('/',(req,res) => {
     })
 });
 
-
 // // for updating table: example updating isCompleted status
 // router.put()
 router.put('/:id',(req,res) => {
@@ -65,13 +59,10 @@ pool.query(sqlText,sqlValues)
     res.sendStatus(200);
     })
 .catch((dbError) =>{
-    console.log('PUT /koalas:id failed',dbError)
+    console.log('PUT /todos:id failed',dbError)
     res.sendStatus(500);
     })
 });
-
-
-
 
 // // for deleting task from task list and from database 
 // router.delete()
@@ -94,9 +85,5 @@ router.delete('/:id',(req,res)=>{
         res.sendStatus(500);
     })
 });
-
-
-
-
 
 module.exports = router;

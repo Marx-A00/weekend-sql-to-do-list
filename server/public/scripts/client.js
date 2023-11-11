@@ -61,11 +61,11 @@ function renderToDoList(todoList){
         viewTodos.innerHTML +=
         `
         <tr data-todoid="${todoItem.id}">
-        <td data-testid="toDoItem" class= ${todoItem.isComplete ? "completed" : "task-not-completed"} >${todoItem.text}</td>
+        <td data-testid="toDoItem" class= ${todoItem.isComplete ? "completed" : "task-not-completed"} >
+        <button data-testid="deleteButton"
+         onclick="deleteTodo(event)">Del</button><button data-testid="completeButton"
+          onclick="markAsCompleted(event)">Ⅹ</button>${todoItem.text}</td>
         <td>${todoItem.isComplete}</td>
-        <td><button data-testid="completeButton" onclick="markAsCompleted(event)">Ⅹ</button>
-
-          <button data-testid="deleteButton" onclick="deleteTodo(event)">Delete Task</button></td>
             </tr>
         `
     }
@@ -74,6 +74,9 @@ function renderToDoList(todoList){
 function deleteTodo(event){
     event.preventDefault();
     let clickedButton = event.target;
+    let testClickedButton = event.target.getAttribute("data-testid");
+    // Verified that clicked button has attribute of data-testid
+    console.log(" test clicked button aka event.target: ",testClickedButton);
     console.log("clicked button aka event.target: ",clickedButton);
     let theTableRow = clickedButton.closest('tr');
     console.log("the table row aka clickedButton.closest('tr'):",theTableRow);
@@ -86,7 +89,7 @@ function deleteTodo(event){
     }).then((response) =>{
         getTasks();
     }).catch((error)=>{
-        console.log('DELETE /books/:id fail',error);
+        console.log('DELETE /todos/:id fail',error);
     })
 }
 

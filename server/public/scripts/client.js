@@ -61,7 +61,7 @@ function renderToDoList(todoList){
         viewTodos.innerHTML +=
         `
         <tr data-todoid="${todoItem.id}">
-        <td data-testid="toDoItem" class= ${todoItem.isComplete ? "task-completed" : "task-not-completed"} >${todoItem.text}</td>
+        <td data-testid="toDoItem" class= ${todoItem.isComplete ? "completed" : "task-not-completed"} >${todoItem.text}</td>
         <td>${todoItem.isComplete}</td>
         <td><button data-testid="completeButton" onclick="markAsCompleted(event)">Ⅹ</button>
 
@@ -74,7 +74,9 @@ function renderToDoList(todoList){
 function deleteTodo(event){
     event.preventDefault();
     let clickedButton = event.target;
+    console.log("clicked button aka event.target: ",clickedButton);
     let theTableRow = clickedButton.closest('tr');
+    console.log("the table row aka clickedButton.closest('tr'):",theTableRow);
 
     let dataID = theTableRow.getAttribute('data-todoid');
     console.log(dataID);

@@ -1,7 +1,7 @@
-.task-completed{
+.completed{
     text-decoration: line-through;
     color:red;
 }
-.book-is-not-read{
+.task-not-completed{
     color:green;
 }

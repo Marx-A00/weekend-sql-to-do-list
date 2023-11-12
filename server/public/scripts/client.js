@@ -63,17 +63,49 @@ function renderToDoList(todoList){
     viewTodos.innerHTML = '';
 
     for(let todoItem of todoList){
+
+        // if !isSubTask -> display text as regular task
+        // else display as subtask <dd> in relation to connected task
         viewTodos.innerHTML +=
         `
         <tr data-todoid="${todoItem.id}">
-        <td data-testid="toDoItem" class= ${todoItem.isComplete ? "completed" : "task-not-completed"} >
-        <button data-testid="deleteButton"
-         onclick="deleteTodo(event)">Del</button><button data-testid="completeButton"
-          onclick="markAsCompleted(event)">Ⅹ</button>${todoItem.text}</td>
+            <td data-testid="toDoItem" class= ${todoItem.isComplete ? "completed" : "task-not-completed"} >
+            <dl>
+            <dt>${todoItem.text}</dt>
+            <dd class="todosubTaskName"> -${todoItem.subTask}</dd>
+            </dl>
+                </td>
         <td>${todoItem.isComplete}</td>
+
+          <td><button data-testid="deleteButton" onclick="deleteTodo(event)">Del</button>
+          <button data-testid="completeButton" onclick="markAsCompleted(event)">Ⅹ</button></td>
             </tr>
         `
     }
+}
+function addSubTask(event){
+    event.preventDefault();
+
+    let subTaskName = document.getElementById("todosubTaskName").value;
+
+    axios({
+        method:'POST',
+        url: '/todos',
+        data:
+         {
+            subTaskName : subTaskName
+         }        
+
+    }).then(function(response){
+        // after post is made, we render again to show new data on client
+        getTasks();
+    }).catch(function(error){
+        console.log('error in post',error);
+    })
+
+
+
+
 }
 
 function deleteTodo(event){

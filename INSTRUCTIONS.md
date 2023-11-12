@@ -88,6 +88,8 @@ x. Each to-do item's "mark complete" button must have:
 
 Add Bootstrap to the front end and style it up!
 -  Buttons -- make the creation buttons and completion buttons green and the delete red.
+
+
 -  Inputs -- make your text inputs styled in the bootstrap way
 -  Responsive -- make your app responsive to different screen sizes.
 

@@ -15,7 +15,8 @@ router.get('/',(req,res) => {
 });
 
 // // gives ability to create a new todo item
-router.post('/',(req,res) => {
+router.post('/',(req,res) => { 
+
     let queryText = 
     `
     INSERT INTO "todos"
@@ -38,6 +39,10 @@ router.post('/',(req,res) => {
         console.log('POST / todos query failed', dbError)
     })
 });
+
+
+
+
 
 // // for updating table: example updating isCompleted status
 // router.put()

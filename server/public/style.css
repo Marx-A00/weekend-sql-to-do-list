@@ -1,7 +1,29 @@
+html{
+    height : 100%;
+}
+body{
+    min-height: 100%;
+    flex-direction: column;
+    display: flex;
+}
 .completed{
     text-decoration: line-through;
     color:red;
 }
 .task-not-completed{
     color:green;
+}
+table,th,td{
+    border: 1px solid;
+    width: 100%;
+}
+dd{
+    padding-left: 20px;
+}
+footer{
+    margin-top: auto;
+    display: flex;
+    padding-top: 100px;
+    flex-grow: 1;
+
 }

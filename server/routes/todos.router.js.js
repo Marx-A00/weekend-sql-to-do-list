@@ -15,21 +15,48 @@ router.get('/',(req,res) => {
 });
 
 // // gives ability to create a new todo item
-router.post('/',(req,res) => { 
+router.post('/',(req,res) => {
+    let queryText;
+    let sqlValues;
+    let body = req.body;
+    console.log(body); 
 
-    let queryText = 
+    // if req.body.isSubTask ==  true;
+    console.log(req.body.isSubTask);
+    if(req.body.isSubTask == true){
+
+        queryText = 
+        `
+        INSERT INTO "todos"
+        ("text","isSubTask","connectedTaskId")
+        VALUES
+        ($1,$2,$3);
+        `
+
+        sqlValues = 
+        [req.body.taskName,req.body.isSubTask,req.body.connectedTaskId]
+    }
+
+    else if (req.body.isSubTask == false){
+
+    queryText = 
+
     `
     INSERT INTO "todos"
     ("text")
     VALUES
     ($1);
     `
+    
 
-
-
-    const sqlValues = [
+     sqlValues = [
         req.body.taskName
     ]
+}
+
+else{
+    console.log("hi honey");
+}
 
     pool.query(queryText,sqlValues)
     .then((dbResult) => {
@@ -39,8 +66,6 @@ router.post('/',(req,res) => {
         console.log('POST / todos query failed', dbError)
     })
 });
-
-
 
 
 

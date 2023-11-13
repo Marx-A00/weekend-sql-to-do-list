@@ -1,6 +1,13 @@
 html{
     height : 100%;
 }
+
+#todo-input{
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
 body{
     min-height: 100%;
     flex-direction: column;
@@ -13,17 +20,22 @@ body{
 .task-not-completed{
     color:green;
 }
+
 table,th,td{
-    border: 1px solid;
+    border: 1px groove;
     width: 100%;
 }
+
 dd{
     padding-left: 20px;
 }
+
 footer{
     margin-top: auto;
     display: flex;
     padding-top: 100px;
     flex-grow: 1;
-
+}
+dt{
+    padding-left: 5px;
 }

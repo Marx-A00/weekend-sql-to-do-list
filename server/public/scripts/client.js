@@ -91,51 +91,49 @@ function markAsCompleted(event){
 }
 
 function renderToDoList(todoList){
-
-    const viewTodos = document.getElementById("todoBody");
+    let viewTodos = document.getElementById("viewTodoList");
+    console.log(document.querySelector("[data-todoid='1']"));
+    console.log(viewTodos);
+    console.log(viewTodos.attributes);
+    let root = viewTodos.childNodes;
+    console.log(root);
     viewTodos.innerHTML = '';
-
+ 
     for(let todoItem of todoList){
 
-        // input field for subtask, check about hitting enter to add task
-        // sub task must be disabled if length or whatever = 0
-        //class="btn btn-outline-primary btn-sm"
-
-        // if !isSubTask -> display text as regular task
-        // else display as subtask <dd> in relation to connected task
-
-
-        // if(todoItem.isSubTask == false){
-        //     viewTodos.innerHTML += 
-        //     `
-        //     <tr data-todoid="${todoItem.id}">
-        //         <td data-testid="toDoItem" class= ${todoItem.isComplete ? "completed" : "task-not-completed"}>
-        //         <dl>
-        //             </dl>
-        //         </tr>
-        
-
-        //     `
-        // }
+     
+        if(todoItem.isSubTask == false){
         viewTodos.innerHTML +=
         `
+            <dl data-todoid="${todoItem.id}" id="toDoItem" class= ${todoItem.isComplete ? "completed" : "task-not-completed"}> ${todoItem.text}</dl>
+        `;
 
-
-        <tr data-todoid="${todoItem.id}">
-            <td data-testid="toDoItem" class= ${todoItem.isComplete ? "completed" : "task-not-completed"} >
-            <dl>
-            <dt> ${todoItem.text} </dt>
-            <dd class="todosubTaskName"> <input id="todoItemSubTask" type="text" placeholder="Enter subtask here!">
-            <button class="btn btn-outline-primary btn-sm" onclick="addTask(event)">Add Subtask</button></dd>
-            </dl>
-                </td>
-
-          <td><button class="btn btn-outline-danger" data-testid="deleteButton" onclick="deleteTodo(event)">Del</button>
-          <button class="btn btn-outline-success" data-testid="completeButton" onclick="markAsCompleted(event)">✅</button></td>
-            </tr>
-        `
-    }
+        }
+        else if(todoItem.isSubTask == true){
+            //.querySelector
+        //closest dt id is the same as todoItem.connectedTaskId
+        // get child
+            let mainTodoTaskElement = document.querySelector(`[data-todoid="${todoItem.connectedTaskId}"]`);
+            
+            mainTodoTaskElement.innerHTML+=
+            `
+            <dd>${todoItem.text}</dd>
+            
+            `
+            
+    //         let mainTodoTaskElement = document.getElementById("data-todoid");
+    //         let mainTodoTaskElementid = mainTodoTaskElement.getAttribute("data-todoid");
+    //         if (todoItem.connectedTaskId == mainTodoTaskElementid){
+    //         mainTodoTaskElement.innerHTML +=
+    //         `
+    //         <dd>${todoItem.text}</dd>
+    //         `
+    //         }
+    //         // might have to be dd already made in viewTodos above where class = todosubtaskname
+    //     }
+        }    
     // add ternary operator for ✅ emoji 
+    }
 }
 
 function addSubTask(event){

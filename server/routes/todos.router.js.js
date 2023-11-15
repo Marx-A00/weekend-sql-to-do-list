@@ -7,6 +7,7 @@ router.get('/',(req,res) => {
     pool.query(queryText)
     .then((dbResult) =>{
         res.send(dbResult.rows); //<--- inside should be result.rows, should return results in an object
+        console.log(dbResult.rows);
     })
     .catch(dbError =>{
         console.log("error getting ToDoList", dbError);
